@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property Job $job
  */
-class JobSkills extends Model
+class JobSkill extends Model
 {
     /**
      * @var array

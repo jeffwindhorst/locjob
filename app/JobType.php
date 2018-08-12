@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $job_type
  * @property Job[] $jobs
  */
-class JobTypes extends Model
+class JobType extends Model
 {
     /**
      * @var array

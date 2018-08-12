@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property State $state
  * @property JobSkill[] $jobSkills
  */
-class Jobs extends Model
+class Job extends Model
 {
     /**
      * @var array

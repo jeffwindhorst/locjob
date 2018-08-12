@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property State $state
  */
-class Cities extends Model
+class City extends Model
 {
     /**
      * @var array
