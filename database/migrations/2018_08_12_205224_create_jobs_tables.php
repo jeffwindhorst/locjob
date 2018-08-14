@@ -16,7 +16,7 @@ class CreateJobsTables extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('jobs', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('state_id')->unsigned();
+            $table->integer('city_id')->unsigned();
             $table->text('linkback');
             $table->integer('job_type_id')->unsigned()->comment('Job types are similar to Contract, Direct Hire, Duration, etc.');
             $table->mediumText('company');
@@ -25,7 +25,7 @@ class CreateJobsTables extends Migration
             $table->decimal('salary', 8,2);
             $table->timestamps();
 
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->foreign('job_type_id')->references('id')->on('job_types');
         });
         Schema::enableForeignKeyConstraints();

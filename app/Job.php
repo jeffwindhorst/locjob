@@ -2,7 +2,10 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
+use App\JobType;
+use App\JobSkill;
 
 /**
  * @property int $id
@@ -24,7 +27,7 @@ class Job extends Model
     /**
      * @var array
      */
-    protected $fillable = ['state_id', 'job_type_id', 'linkback', 'company', 'title', 'description', 'salary', 'created_at', 'updated_at'];
+    protected $fillable = ['city_id', 'job_type_id', 'linkback', 'company', 'title', 'description', 'salary', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -37,9 +40,9 @@ class Job extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function state()
+    public function city()
     {
-        return $this->belongsTo('App\State');
+        return $this->belongsTo('App\City');
     }
 
     /**

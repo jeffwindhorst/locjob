@@ -46,12 +46,13 @@ class cityData extends Command
         $data = [];
         
         $jdata = json_decode(file_get_contents($JSONFile), true);
-        echo "Inserting: " . count($jdata) . " city records.";
-        \App\City::insert($jdata);
-        foreach($jdata as $data) {
-            City::firstOrCreate($data);
-        }
-        echo "Cities imported.";
-        echo App\City::count() . " currently in the system.";
+        echo "Inserting: " . count($jdata) . " city records.\n";
+
+        // Clear the table first then populate it.
+        City::truncate();
+        City::insert($jdata);
+
+        echo "Cities imported.\n";
+        echo City::count() . " currently in the system.\n";
     }
 }
