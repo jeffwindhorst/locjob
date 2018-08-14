@@ -6,7 +6,6 @@ use Faker\Generator as Faker;
 // Great documentation at https://github.com/fzaninotto/Faker#fakerproviderlorem
 $factory->define(App\Job::class, function (Faker $faker) {
 
-    $cityIDs = DB::table('cities')->pluck('id');
     return [
         'city_id' => $faker->randomElement(DB::table('cities')->pluck('id')),
         'linkback' => str_random(10).'@example.com',
