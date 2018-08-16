@@ -16,9 +16,17 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
+    <script src="https://use.fontawesome.com/9712be8772.js"></script>
 </head>
 <body>
     <div id="app">
@@ -34,7 +42,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @if (!Auth::guest())
+                            <li><a href=""{{ route('posts.create') }}">New City</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -49,6 +59,9 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
+                                @role('Admin')
+                                <a href="#"><i class="fa fa-btn fa-unlock"></i>Admin</a>
+                                @endrole
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -71,9 +84,26 @@
             </div>
         </nav>
 
+        @if(Session::has('flash_message'))
+        <div class="container">
+            <div class="alert alert-success">
+                <em> {!! session('flash_message') !!}</em>
+            </div>
+        </div>
+        @endif
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                @include ('errors.list')
+            </div>
+        </div>
+        
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+    
+    <script src="{{ asset('js/app.js') }}"></script>
+    
 </body>
 </html>
