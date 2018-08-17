@@ -43,7 +43,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @if (!Auth::guest())
-                            <li><a href=""{{ route('posts.create') }}">New City</a></li>
+                            <li><a href="{{ route('city.create') }}">New City</a></li>
                         @endif
                     </ul>
 
