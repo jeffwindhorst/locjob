@@ -24,8 +24,10 @@ class CityController extends Controller
     public function index()
     {
         $cities = City::orderby('id', 'name')->paginate(25); //show only 5 items at a time in descending order
-
-        return view('city.index', compact('cities'));
+        $returnVars = compact('cities');
+        $returnVars['totalCities'] = City::count();
+        
+        return view('admin.city.index', $returnVars);
     }
 
     /**
@@ -70,9 +72,9 @@ class CityController extends Controller
      */
     public function show($id)
     {
-        $city = Post::findOrFail($id);
+        $city = City::findOrFail($id);
         
-        return view ('cities.shot', compact('city'));
+        return view ('admin.city.show', compact('city'));
     }
 
     /**

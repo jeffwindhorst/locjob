@@ -6,7 +6,7 @@
 
 <div class="container">
     
-    <h1>{{ $city->title }}, {{ $city->state }}</h1>
+    <h1>{{ $city->name }}, {{ $city->state }}</h1>
     <hr>
     <ul>
         <li><strong>Population:</strong> {{ $city->population }}</li>

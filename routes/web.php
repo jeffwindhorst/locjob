@@ -26,6 +26,8 @@ Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/admin/city', 'CityController@index')->name('city');
 Route::get('/admin/city/create', 'CityController@create')->name('city.create');
 
+Route::post('skill/search', 'JobController@search')->name('skill.search');
+
 Route::resource('users', 'UserController');
 Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');

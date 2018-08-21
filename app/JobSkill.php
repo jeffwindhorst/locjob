@@ -24,6 +24,6 @@ class JobSkill extends Model
      */
     public function job()
     {
-        return $this->belongsTo('App\Job');
+        return $this->belongsToMany('App\Job', 'jobs', 'job_id', 'job');
     }
 }
