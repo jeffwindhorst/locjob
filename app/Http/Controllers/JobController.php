@@ -10,15 +10,17 @@ class JobController extends Controller
 {
     public function search(Request $request) {
         
-        $skill = $request->input('skills');
-        $jobSkills = JobSkill::where('skill', $skill)->get();
-        echo '<pre>';
-        echo 'COUNT: ' . count($jobSkills) . '<br>';
-        foreach($jobSkills as $skill) {
-            print_r($skill->job->get());
-        }
-        echo '</pre>';
+        $skills[] = $request->input('skills');
+        $jobs = JobSkill::where('skill', $skills)->get();
         
-        exit;
+        foreach($jobs as $job)
+        {
+//            echo '<Pre>';
+//            print_r($job->job->city->get());
+//            echo '</pre>';
+//            exit;
+        }
+        
+        return view('search_results', ['skills' => $skills, 'jobs' => $jobs]);
     }
 }

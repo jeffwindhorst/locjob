@@ -2,6 +2,7 @@
 
 return [
 
+    "mapsApiKey" => "AIzaSyAY5b85g2-2cHevaScw7onX53zn1oBk6ic",
     /*
     |--------------------------------------------------------------------------
     | Application Name
