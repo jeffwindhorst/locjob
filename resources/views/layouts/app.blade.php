@@ -43,7 +43,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @if (!Auth::guest())
-                            <li><a href="{{ route('city.create') }}">New City</a></li>
+                            <li><a href="{{ route('city.index') }}">Cities</a></li>
+                            <li><a href="{{ route('permissions.index') }}">Permissions</a></li>
+                            <li><a href="{{ route('roles.index') }}">Roles</a></li>
+                            <li><a href="{{ route('users.index') }}">Users</a></li>
                         @endif
                     </ul>
 

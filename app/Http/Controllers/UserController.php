@@ -37,7 +37,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::get();
-        return view('admin.user.create', ['roles'=>$roles]);
+        return view('admin.users.create', ['roles'=>$roles]);
     }
 
     /**

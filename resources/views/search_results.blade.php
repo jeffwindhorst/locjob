@@ -23,15 +23,34 @@
               mapTypeId: google.maps.MapTypeId.ROADMAP
             });
 
-            var infowindow = new google.maps.InfoWindow();
-
-            var marker, i;
+            var markers = [], chHtmls = [], i;
 
             for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
+                markers[i] = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
                     map: map
                 });
+                chHtmls[i] = "<ul><li><strong>"+locations[i].name+", "+ locations[i].state+"</strong></li><li>Population: "+locations[i].population+"</li><li>Jobs: "+locations[i].job_total+"</li></ul>";
+                if(i === 0) {console.log(chHtmls[i]); }
+                
+                //open infowindow on click event on marker.
+                
+                var chInfoWindows = new google.maps.InfoWindow({
+                    content:chHtmls[i]
+                });
+                markers[i].addListener('click', function(){
+                    console.log('Event triggered');
+                    chInfoWindows.open(map, markers[i]);
+                });
+                
+//                google.maps.event.addListener(markers[i], 'click', function() {
+//                    chInfoWindows[i] = new google.maps.InfoWindow({
+//                        content: chHtmls[i],
+//                        maxWidth:250
+//                    });
+//                    chInfoWindows[i].open(map, markers[i]);
+//                });
+                
             }
         }
 

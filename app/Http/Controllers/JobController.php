@@ -13,16 +13,13 @@ class JobController extends Controller
     public function search(Request $request) {
         
         $skills = $request->input('skills');
-        $jobsByCity = DB::select(DB::raw("SELECT cities.name, cities.state, cities.growth_from_2000_to_2013, cities.latitude, cities.longitude, SUM(jobs.id) as job_total "
+        $jobsByCity = DB::select(DB::raw("SELECT cities.name, cities.state, cities.growth_from_2000_to_2013, cities.population, cities.latitude, cities.longitude, SUM(jobs.id) as job_total "
                 . "FROM `cities` "
                 . "JOIN jobs ON cities.id = jobs.city_id "
                 . "JOIN job_skills ON jobs.id = job_skills.job_id "
                 . "WHERE job_skills.skill = '" .$skills . "' "
                 . "GROUP BY jobs.id "));    
 
-        $jcities = json_encode($jobsByCity);
-       
-        
         return view('search_results', ['skills' => $skills, 'jcities' => $jobsByCity]);
     }
 }

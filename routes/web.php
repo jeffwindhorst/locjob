@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
  * Admin routes
  */
 Route::get('/admin', 'AdminController@index')->name('admin');
-Route::get('/admin/city', 'CityController@index')->name('city');
+Route::get('/admin/city', 'CityController@index')->name('city.index');
 Route::get('/admin/city/create', 'CityController@create')->name('city.create');
 
 Route::post('skill/search', 'JobController@search')->name('skill.search');

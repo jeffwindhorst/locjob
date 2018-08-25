@@ -12,7 +12,10 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-
+ul.navbar-nav ul li {
+    padding: 5px;
+    margin: 0 15px 0 0;
+}
 p.teaser {
     text-indent: 30px;
 }
