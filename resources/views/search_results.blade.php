@@ -13,48 +13,9 @@
     </ul>
 
     <div id="map" style="width: 800px; height: 500px; display: block; border: 1px solid red;"></div>
-    <!--
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false" async defer></script>
-    -->
+    
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false" ></script>
-    <script>
-        /*
-        var cities = <?php // echo json_encode($jcities); ?>;
-        function initMap() {
-            var locations = cities;
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 10,
-              center: new google.maps.LatLng(41.850033, -87.6500523),
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-
-            var markers = [], chHtmls = [], i;
-
-            for (i = 0; i < locations.length; i++) {
-                markers[i] = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
-                    map: map
-                });
-                chHtmls[i] = "<ul><li><strong>"+locations[i].name+", "+ locations[i].state+"</strong></li><li>Population: "+locations[i].population+"</li><li>Jobs: "+locations[i].job_total+"</li></ul>";
-                if(i === 0) {console.log(chHtmls[i]); }
-                
-                //open infowindow on click event on marker.
-                
-                var chInfoWindows = new google.maps.InfoWindow({
-                    content:chHtmls[i]
-                });
-                
-                google.maps.event.addListener(markers[i], 'click', function(markers[i], chHtmls[i], chInfoWindows) {
-                    return function() {
-                        chInfoWindows.setContent(chHtmls[i]);
-                        chInfoWindows.open(map, marker);
-                    };
-                })(markers[i], content, chInfoWindows);
-                
-            }
-        }
-        */
-        
+    <script>        
         var cities = <?php echo json_encode($jcities); ?>;
         function initMap() {
             var map;
@@ -67,43 +28,13 @@
             map = new google.maps.Map(document.getElementById("map"), mapOptions);
             map.setTilt(50);
 
-            // Multiple markers location, latitude, and longitude
-//            var markers = [
-//                ['Brooklyn Museum, NY', 40.671531, -73.963588],
-//                ['Brooklyn Public Library, NY', 40.672587, -73.968146],
-//                ['Prospect Park Zoo, NY', 40.665588, -73.965336]
-//            ];
-
-            var markers = cities;
-            
-            // Info window content
-            var infoWindowContent = [
-                ['<div class="info_content">' +
-                '<h3>Brooklyn Museum</h3>' +
-                '<p>The Brooklyn Museum is an art museum located in the New York City borough of Brooklyn.</p>' + '</div>'],
-                ['<div class="info_content">' +
-                '<h3>Brooklyn Public Library</h3>' +
-                '<p>The Brooklyn Public Library (BPL) is the public lib rary system of the borough of Brooklyn, in New York City.</p>' +
-                '</div>'],
-                ['<div class="info_content">' +
-                '<h3>Prospect Park Zoo</h3>' +
-                '<p>The Prospect Park Zoo is a 12-acre (4.9 ha) zoo located off Flatbush Avenue on the eastern side of Prospect Park, Brooklyn, New York City.</p>' +
-                '</div>']
-            ];
-
-            // Add multiple markers to map
             var infoWindow = new google.maps.InfoWindow(), markers, i;
-
+            var markers = cities;
             // Place each marker on the map 
-            console.log("Length: " + markers.length);
             for( i = 0; i < markers.length; i++ ) {
-                console.log('I: ' +i);
 
-                console.log('passed');
                 var position = new google.maps.LatLng(markers[i].latitude, markers[i].longitude);
-                console.log('Position: ' + position);
                 bounds.extend(position);
-                console.log('here 1');
                 marker = new google.maps.Marker({
                     position: position,
                     map: map,
@@ -112,15 +43,25 @@
 
                 // Add info window to marker    
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    if (i === 0) { console.log(markers[i].population) };
                     return function() {
-                        infoWindow.setContent('Population: ' + marker.population);
+                        var infoWindowContent = 
+                            '<div class="info-content">' +
+                            '<h3>' + markers[i].name + ', ' + markers[i].state + '</h3>' +
+                            '<ul>' +
+                            '<li><strong>Population: </strong>' + markers[i].population + '</li>' + 
+                            '<li><strong>Job count: </strong>' + markers[i].job_total + '</li>' +
+                            '</ul>' + 
+                            '</div>';
+        
+                        infoWindow.setContent(infoWindowContent);
+//                        infoWindow.setContent('<strong style="font-weight: 900;">Population: </strong>' + markers[i].population);
                         infoWindow.open(map, marker);
                     };
                 })(marker, i));
 
                 // Center the map to fit all markers on the screen
                 map.fitBounds(bounds);
-                console.log('HERE');
             }
 
             // Set zoom level

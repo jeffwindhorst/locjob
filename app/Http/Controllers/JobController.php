@@ -11,6 +11,7 @@ use Session;
 class JobController extends Controller
 {
     public function search(Request $request) {
+
         
         $skills = $request->input('skills');
         $jobsByCity = DB::select(DB::raw("SELECT cities.name, cities.state, cities.growth_from_2000_to_2013, cities.population, cities.latitude, cities.longitude, SUM(jobs.id) as job_total "
