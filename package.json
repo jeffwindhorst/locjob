@@ -11,16 +11,18 @@
     },
     "devDependencies": {
         "axios": "^0.18.0",
-        "bootstrap": "^4.0.0",
-        "cross-env": "^5.1",
-        "jquery": "^3.2",
-        "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
-        "popper.js": "^1.12",
-        "vue": "^2.5.7",
+        "bootstrap": "^4.1.3",
+        "cross-env": "^5.2",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "jquery": "^3.3",
+        "laravel-mix": "^2.1",
+        "lodash": "^4.17.10",
+        "popper.js": "^1.14",
+        "vue": "^2.5.17",
         "webpack-cli": "^3.1.0"
     },
     "dependencies": {
+        "gulp": "^3.9.1",
         "webpack": "^4.17.1"
     }
 }

@@ -43,14 +43,23 @@
 
                 // Add info window to marker    
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    if (i === 0) { console.log(markers[i].population) };
+                    
                     return function() {
+                        if(markers[i].growth > 0){ 
+                                    arrow = "&#8593;";
+                                    arrowClass = "arrow-class-up";
+                        } else {
+                                    arrow = "&#8595;";
+                                    arrowClass = "arrow-class-down";
+                        }
+                        perGrowth = '%' + markers[i].growth.replace('-', '');
                         var infoWindowContent = 
                             '<div class="info-content">' +
                             '<h3>' + markers[i].name + ', ' + markers[i].state + '</h3>' +
                             '<ul>' +
                             '<li><strong>Population: </strong>' + markers[i].population + '</li>' + 
                             '<li><strong>Job count: </strong>' + markers[i].job_total + '</li>' +
+                            '<li><strong>Growth: </strong>' + perGrowth + ' <span class="'+ arrowClass +'">' + arrow + '</span></li>' +
                             '</ul>' + 
                             '</div>';
         
