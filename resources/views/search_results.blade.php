@@ -12,10 +12,13 @@
         <li>{{ $skills }}</li>
     </ul>
 
-    <div id="map" style="width: 800px; height: 500px; display: block; border: 1px solid red;"></div>
+    @include('partials.map_sidebar')
     
+    <div id="map" style="width: 800px; height: 500px; display: block; border: 1px solid red;"></div>
+
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false" ></script>
-    <script>        
+    <script> 
+        // todo move this to it's own file
         var cities = <?php echo json_encode($jcities); ?>;
         function initMap() {
             var map;
@@ -53,6 +56,7 @@
                                     arrowClass = "arrow-class-down";
                         }
                         perGrowth = '%' + markers[i].growth.replace('-', '');
+                        
                         var infoWindowContent = 
                             '<div class="info-content">' +
                             '<h3>' + markers[i].name + ', ' + markers[i].state + '</h3>' +
@@ -60,12 +64,27 @@
                             '<li><strong>Population: </strong>' + markers[i].population + '</li>' + 
                             '<li><strong>Job count: </strong>' + markers[i].job_total + '</li>' +
                             '<li><strong>Growth: </strong>' + perGrowth + ' <span class="'+ arrowClass +'">' + arrow + '</span></li>' +
+                            '<li><a href="javascript:void(0);" class="pull-right" data-city-id="'+ markers[i].cityId+'">Details</a></li>' +
                             '</ul>' + 
                             '</div>';
         
                         infoWindow.setContent(infoWindowContent);
-//                        infoWindow.setContent('<strong style="font-weight: 900;">Population: </strong>' + markers[i].population);
                         infoWindow.open(map, marker);
+                        $('.info-content ul li a').on('click', function(e){
+                             e.preventDefault();
+                             $('#map-sidebar').show();
+                             cityId=$(this).data('city-id');
+                             console.log('ID ' + cityId);
+                             $.post('/city/details', { id: cityId, '_token': csrf }, function(data){
+                                jdata = $.parseJSON(data);
+                                console.log('JDATA ' + jdata.name);
+                                $('.detail-name span').text(jdata.name + ', ' + jdata.state);
+                                $('.detail-population span').text(jdata.population);
+                                $('.detail-growth span').text('%' + jdata.growth_from_2000_to_2013);
+                                $('.detail-coords span').text(jdata.longitude + '/' + jdata.latitude);
+                             });
+                        });
+                        
                     };
                 })(marker, i));
 
@@ -73,21 +92,16 @@
                 map.fitBounds(bounds);
             }
 
-            // Set zoom level
-            var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-                this.setZoom(14);
-                google.maps.event.removeListener(boundsListener);
-            });
-
         }
         // Load initialize function
         google.maps.event.addDomListener(window, 'load', initMap);
 
+        $(document).ready(function(){
+            $('.info-content ul li a').on('click', function(){
+                console.log('clicked');
+            });
+        });
     </script>
-    <!--
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap"async defer></script>
-    -->
-    
 
 </div>
 

@@ -15,6 +15,7 @@ class JobController extends Controller
         
         $skills = $request->input('skills');
         $jobsByCity = DB::select(DB::raw("SELECT "
+                . "cities.id as cityId, "
                 . "cities.name, "
                 . "cities.state, "
                 . "cities.growth_from_2000_to_2013 AS growth, "

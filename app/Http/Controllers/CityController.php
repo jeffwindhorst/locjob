@@ -70,11 +70,12 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $city = City::findOrFail($id);
+        $city = City::findOrFail($request->input('id'));
+        echo json_encode($city);
         
-        return view ('admin.city.show', compact('city'));
+//        return view ('admin.city.show', compact('city'));
     }
 
     /**

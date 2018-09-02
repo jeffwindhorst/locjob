@@ -11,8 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -25,6 +26,12 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var csrf = $('meta[name="csrf-token"]').attr('content');
     </script>
     <script src="https://use.fontawesome.com/9712be8772.js"></script>
 </head>
@@ -102,6 +109,9 @@
         </div>
         
         <main class="py-4">
+            @if( Request::path() == 'skill/search')
+            @include('partials.map_sidebar')
+            @endif
             @yield('content')
         </main>
     </div>

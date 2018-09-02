@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div id="city-container" class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -11,9 +11,11 @@
                 </div>
                 @foreach ($cities as $city)
                 <div class="panel-body">
-                    <li style="list-style-type:disc">
-                        <a href="{{ route('cities.show', $city->id) }}"><b>{{ $city->name }}, {{ $city->state }}</b></a>
-                    </li>
+                    <ul>
+                        <li>
+                            <a href="{{ route('cities.show', $city->id) }}"><b>{{ $city->name }}, {{ $city->state }}</b></a>
+                        </li>
+                    </ul>
                 </div>
                 @endforeach
             </div>

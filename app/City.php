@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $state_id
  * @property int $name
  * @property float $latitude
  * @property float $longitude
@@ -19,7 +18,7 @@ class City extends Model
     /**
      * @var array
      */
-    protected $fillable = ['state_id', 'name', 'latitude', 'longitude', 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'latitude', 'longitude', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

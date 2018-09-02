@@ -27,6 +27,7 @@ Route::get('/admin/city', 'CityController@index')->name('city.index');
 Route::get('/admin/city/create', ['middleware' => 'auth'], 'CityController@create')->name('city.create');
 
 Route::post('skill/search', 'JobController@search')->name('skill.search');
+Route::post('city/details', 'CityController@show')->name('city.details');
 
 Route::resource('users', 'UserController');
 Route::resource('roles', 'RoleController');
