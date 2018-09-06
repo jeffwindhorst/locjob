@@ -161,6 +161,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Weidner\Goutte\GoutteServiceProvider::class,
+
 
     ],
 
@@ -213,6 +215,7 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
     ],
 
 ];
